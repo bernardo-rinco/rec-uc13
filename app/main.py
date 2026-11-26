@@ -33,3 +33,5 @@ def comprar_ingressos(evento_id: int, pedido: PedidoIngressos):
         raise HTTPException(status_code=404, detail="Evento não encontrado")
     atualizado = repositorio.registrar_ingressos(evento_id, pedido.quantidade)
     return atualizado
+
+print ("teste")
