@@ -1,16 +1,19 @@
 # Relatório técnico de manutenção
 
 **Estudante:**  
-**Data:** 25/11/2026
+**Data:** 26/11/2026
 
 ## Estado inicial e diagnóstico
-Descreva os problemas observados com as evidências que fundamentaram a investigação.
+1- Ao tentar consultar api/eventos foi me mostado um erro interno de servidor "Internal Server Error"
 
 ## Intervenções
-Explique as causas identificadas e as modificações realizadas.
+1- Ao nalisando o código interno foi verificado que no arquivo "repositorio.py" o banco que estava conectado, estava vazio, então apos indentificar o problema, fiz a trocas por um outro banco com os devidos eventos já cadastrados.
 
 ## Validação
-Apresente testes realizados, resultados esperados e obtidos e como verificou a persistência.
+1- teste inicial = ![alt text](image.png) / teste apos correção = ![alt text](image-1.png).
 
 ## Entrega e versionamento
-Informe o repositório próprio, os commits realizados e eventuais limitações.
+url do repositorio: https://github.com/bernardo-rinco/rec-uc13.git
+1- commit 5bcd7892aab46ae84b1e37bd2fb83fd7df1514a9
+
+
