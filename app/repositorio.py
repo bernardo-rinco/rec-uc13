@@ -19,13 +19,12 @@ def listar_eventos():
         linhas = conexao.execute(
             """SELECT id, nome, capacidade, ingressos_vendidos
                FROM eventos
-               WHERE capacidade >= 50
                ORDER BY id"""
         ).fetchall()
         return [dict(linha) for linha in linhas]
     finally:
         conexao.close()
-
+#    "WHERE capacidade >= 50" regra de negócio para filtrar eventos com capacidade maior ou igual a 50, mas foi removida para listar todos os eventos.
 def buscar_evento(evento_id: int):
     conexao = conectar()
     try:
