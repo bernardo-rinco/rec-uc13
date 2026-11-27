@@ -5,7 +5,7 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parents[1]
 CAMINHO_BANCO = Path(os.environ.get(
-    "UC13_DB_PATH", str(RAIZ / "dados" / "eventos.db")
+    "UC13_DB_PATH", str(RAIZ / "dados" / "eventos.db")# nessa linha foi feita a troca do caminho do banco de dados para o caminho correto do arquivo eventos.db
 ))
 
 def conectar():

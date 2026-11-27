@@ -1,16 +1,19 @@
 # Relatório técnico de manutenção
 
 **Estudante:**  
-**Data:** 25/11/2026
+**Data:** 27/11/2026
 
 ## Estado inicial e diagnóstico
-Descreva os problemas observados com as evidências que fundamentaram a investigação.
+1- Ao executar a rota "GET /api/eventos", o resultado fornecido não foi o esperado, a mensagem que apareceu foi "Internal Server Error".
 
 ## Intervenções
-Explique as causas identificadas e as modificações realizadas.
+1- Analisando essa mensagem, foi notado que, no código do "repositorio.py", o banco que estava sendo referenciado para fazer as consultas era um banco vazio, então fizemos a mudança para um banco com valores existentes.
 
 ## Validação
-Apresente testes realizados, resultados esperados e obtidos e como verificou a persistência.
+0- ![alt text](get-saude.png)
+
+1- ![alt text](<get-eventos erro.png>)
+1- ![alt text](<get-eventos correto.png>)
 
 ## Entrega e versionamento
-Informe o repositório próprio, os commits realizados e eventuais limitações.
+1- commit 5bcd7892aab46ae84b1e37bd2fb83fd7df1514a9
