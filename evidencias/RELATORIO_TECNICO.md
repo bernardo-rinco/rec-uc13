@@ -10,6 +10,10 @@
 
 3- Na rota "POST /api/eventos", ao cadastrar dados válidos de um evento, foi notado que, em vez de aparecer o código HTTP 201 Created, estava aparecendo o código 200 OK.
 
+4- Ao executar a rota GET /api/eventos/{evento_id}/disponibilidade, foi notado um erro, pois, ao comprar os ingressos, em vez de a API fazer a subtração de ingressos comprados menos a quantidade de ingressos disponíveis, ela estava fazendo o oposto e somando as duas.
+
+
+
 ## Intervenções
 1- Analisando essa mensagem, foi notado que, no código do "repositorio.py", o banco que estava sendo referenciado para fazer as consultas era um banco vazio, então fizemos a mudança para um banco com valores existentes.
 
@@ -30,6 +34,9 @@
 3- ![alt text](<cadastro novo evento com o código HTTP correto.png>)
 3- ![alt text](<cadastro invalido com o codigo HTTP 422.png>)
 
+4- ![alt text](<compra dos ingressos.png>)
+4- ![alt text](<comprovação da compras dos ingressos.png>)
+4- 
 ## Entrega e versionamento
 1- commit 5bcd7892aab46ae84b1e37bd2fb83fd7df1514a9
 

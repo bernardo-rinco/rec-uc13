@@ -73,7 +73,7 @@ def consultar_disponibilidade(evento_id: int):
         "nome": evento["nome"],
         "capacidade": evento["capacidade"],
         "ingressos_vendidos": evento["ingressos_vendidos"],
-        "vagas_disponiveis": evento["capacidade"] + evento["ingressos_vendidos"],
+        "vagas_disponiveis": evento["capacidade"] - evento["ingressos_vendidos"],# foi feito a substitição do operado "+" pelo "-" para receber o resultado esperado 
     }
 
 def listar_mais_vendidos(limite: int = 3):
