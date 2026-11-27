@@ -5,7 +5,7 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parents[1]
 CAMINHO_BANCO = Path(os.environ.get(
-    "UC13_DB_PATH", str(RAIZ / "dados" / "eventos.db")
+    "UC13_DB_PATH", str(RAIZ / "dados" / "eventos.db")# nessa linha foi feita a troca do caminho do banco de dados para o caminho correto do arquivo eventos.db
 ))
 
 def conectar():
@@ -19,13 +19,12 @@ def listar_eventos():
         linhas = conexao.execute(
             """SELECT id, nome, capacidade, ingressos_vendidos
                FROM eventos
-               WHERE capacidade >= 50
                ORDER BY id"""
         ).fetchall()
         return [dict(linha) for linha in linhas]
     finally:
         conexao.close()
-
+#    "WHERE capacidade >= 50" regra de negócio para filtrar eventos com capacidade maior ou igual a 50, mas foi removida para listar todos os eventos.
 def buscar_evento(evento_id: int):
     conexao = conectar()
     try:
@@ -62,5 +61,52 @@ def registrar_ingressos(evento_id: int, quantidade: int):
             (evento_id,),
         ).fetchone()
         return dict(linha) if linha is not None else None
+    finally:
+        conexao.close()
+
+def consultar_disponibilidade(evento_id: int):
+    evento = buscar_evento(evento_id)
+    if evento is None:
+        return None
+    return {
+        "evento_id": evento["id"],
+        "nome": evento["nome"],
+        "capacidade": evento["capacidade"],
+        "ingressos_vendidos": evento["ingressos_vendidos"],
+        "vagas_disponiveis": evento["capacidade"] + evento["ingressos_vendidos"],
+    }
+
+def listar_mais_vendidos(limite: int = 3):
+    conexao = conectar()
+    try:
+        linhas = conexao.execute(
+            """SELECT id, nome, capacidade, ingressos_vendidos
+               FROM eventos
+               ORDER BY ingressos_vendidos ASC, id ASC
+               LIMIT ?""",
+            (limite,),
+        ).fetchall()
+        return [dict(linha) for linha in linhas]
+    finally:
+        conexao.close()
+
+def cancelar_ingressos(evento_id: int, quantidade: int):
+    conexao = conectar()
+    try:
+        cursor = conexao.execute(
+            """UPDATE eventos
+               SET ingressos_vendidos = ingressos_vendidos - ?
+               WHERE id = ?""",
+            (quantidade, evento_id),
+        )
+        if cursor.rowcount == 0:
+            return None
+        conexao.commit()
+        linha = conexao.execute(
+            """SELECT id, nome, capacidade, ingressos_vendidos
+               FROM eventos WHERE id = ?""",
+            (evento_id,),
+        ).fetchone()
+        return dict(linha)
     finally:
         conexao.close()
